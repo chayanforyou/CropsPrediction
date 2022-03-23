@@ -11,18 +11,15 @@ model = pickle.load(open("model.pkl", "rb"))
 def index():
     return render_template("index.html")
 
-@app.route("/predict", methods=['GET', 'POST'])
+@app.route("/predict", methods=['POST'])
 def predict():
-    if request.method == 'POST':
-        float_features = [float(x) for x in request.form.values()]
-        features = [np.array(float_features)]
-        prediction = model.predict(features)[0]
-        return render_template("index.html", prediction_text = "The Crop is {}".format(prediction))
-    else:
-        return render_template("index.html")
+    float_features = [float(x) for x in request.form.values()]
+    features = [np.array(float_features)]
+    prediction = model.predict(features)[0]
+    return render_template("index.html", prediction_text = "The Crop is {}".format(prediction))
 
 @app.route('/api/predict', methods=['POST'])
-def predict_api():
+def predictApi():
     n = request.form.get('n')
     p = request.form.get('p')
     k = request.form.get('k')
@@ -35,5 +32,5 @@ def predict_api():
     return jsonify({'predicted':str(result)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
     #app.run(host='192.168.0.215', port=5000, debug=False, threaded=True)
