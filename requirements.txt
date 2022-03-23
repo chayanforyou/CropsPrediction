@@ -5,7 +5,7 @@ scikit-learn==1.0
 sklearn==0.0
 numpy==1.18.5
 pickle4==0.0.1
-Click==7.0
+click>=7.1.2
 Frozen-Flask==0.15
 itsdangerous>=2.0
 Jinja2==2.10
